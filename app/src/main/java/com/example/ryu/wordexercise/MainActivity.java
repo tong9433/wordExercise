@@ -1,21 +1,17 @@
 package com.example.ryu.wordexercise;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
-import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
@@ -31,27 +27,25 @@ public class MainActivity extends AppCompatActivity {
     Realm realm;
     Word word;
 
+    Button bt_recognize;
+    Button bt_translate;
+    Button bt_textToSpeech;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.lv_word);
+        bt_recognize = (Button) findViewById(R.id.bt_recognize);
+        bt_translate = (Button) findViewById(R.id.bt_translate);
+        bt_textToSpeech = (Button) findViewById(R.id.bt_textToSpeech);
+
         arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
         listView.setAdapter(arrayAdapter);
         copyExcelToDatabase();
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                realm.deleteAll();
-            }
-        });
-    }
 
     protected void copyExcelToDatabase() {
         try {
@@ -75,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
                                 Log.d("Word UTF checking", ""+word.getWord());
                                 word.setMean(sheet.getCell(1,i).getContents().toString());
                                 Log.d("Mean UTF checking", ""+word.getMean());
-                                //UTF-8 변환문제 해결
                             }
                         }
                     });
@@ -99,5 +92,16 @@ public class MainActivity extends AppCompatActivity {
             String result = word +" : "+mean;
             arrayAdapter.add(result);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.deleteAll();
+            }
+        });
     }
 }
