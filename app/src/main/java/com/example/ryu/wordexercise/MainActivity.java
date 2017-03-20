@@ -9,16 +9,20 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
+import jxl.WorkbookSettings;
 
 public class MainActivity extends AppCompatActivity {
     Workbook workbook = null;
+    WorkbookSettings workbookSettings;
     Sheet sheet = null;
     InputStream inputStream;
     ListView listView;
@@ -52,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
     protected void copyExcelToDatabase() {
         try {
             inputStream = getBaseContext().getResources().getAssets().open("words.xls");
-            workbook = Workbook.getWorkbook(inputStream);
+            workbookSettings = new WorkbookSettings();
+            workbookSettings.setEncoding("euc-kr");
+            workbook = Workbook.getWorkbook(inputStream, workbookSettings);
 
             if( workbook != null) {
                 Log.d("check1", "workbook is not null");
@@ -65,8 +71,10 @@ public class MainActivity extends AppCompatActivity {
                         public void execute(Realm realm) {
                             for(int i=0; i<800; i++) {
                                 word = realm.createObject(Word.class);
-                                word.setWord(sheet.getCell(0, i).getContents());
-                                //word.setMean(sheet.getCell(1,i).getContents());
+                                word.setWord(sheet.getCell(0, i).getContents().toString());
+                                Log.d("Word UTF checking", ""+word.getWord());
+                                word.setMean(sheet.getCell(1,i).getContents().toString());
+                                Log.d("Mean UTF checking", ""+word.getMean());
                                 //UTF-8 변환문제 해결
                             }
                         }
@@ -87,7 +95,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("result size : ", ""+results.size());
         for (int i = 0; i < results.size(); i++) {
             String word = results.get(i).getWord().toString();
-            arrayAdapter.add(word);
+            String mean = results.get(i).getMean().toString();
+            String result = word +" : "+mean;
+            arrayAdapter.add(result);
         }
     }
 }
