@@ -44,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
         copyExcelToDatabase();
 
+        bt_recognize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RecognizeActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
