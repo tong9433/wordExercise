@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.ryu.wordexercise.MainActivity">
-
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lv_word">
+        android:layout_height="400dp">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lv_word"/>
+    </LinearLayout>
 
-    </ListView>
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/bt_recognize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="음성인식" />
+
+        <Button
+            android:id="@+id/bt_translate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기계번역" />
+
+        <Button
+            android:id="@+id/bt_textToSpeech"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="음성합성" />
+    </LinearLayout>
+
+</LinearLayout>
