@@ -1,4 +1,4 @@
-package com.example.ryu.wordexercise;
+package com.example.ryu.wordexercise.DB;
 
 import io.realm.RealmObject;
 
