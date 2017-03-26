@@ -3,19 +3,21 @@
     package="com.example.ryu.wordexercise">
 
     <application
-        android:name=".MyApplication"
+        android:name=".DB.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.RunningGameActivity" />
+        <activity android:name=".Activity.QuizGameActivity" />
     </application>
 
 </manifest>
