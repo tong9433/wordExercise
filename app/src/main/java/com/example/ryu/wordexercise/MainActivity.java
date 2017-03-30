@@ -1,15 +1,13 @@
 package com.example.ryu.wordexercise;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
 import java.io.InputStream;
 
 import io.realm.Realm;
@@ -28,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     Realm realm;
     Word word;
-    Context mContext = this;
 
     Button bt_recognize;
     Button bt_translate;
@@ -47,13 +44,6 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
         copyExcelToDatabase();
 
-        bt_translate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, TranslateActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
@@ -76,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
                             for(int i=0; i<800; i++) {
                                 word = realm.createObject(Word.class);
                                 word.setWord(sheet.getCell(0, i).getContents().toString());
-//                                Log.d("Word UTF checking", ""+word.getWord());
+                                Log.d("Word UTF checking", ""+word.getWord());
                                 word.setMean(sheet.getCell(1,i).getContents().toString());
-//                                Log.d("Mean UTF checking", ""+word.getMean());
+                                Log.d("Mean UTF checking", ""+word.getMean());
                             }
                         }
                     });

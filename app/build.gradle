@@ -21,7 +21,6 @@ android {
 }
 
 
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -29,7 +28,6 @@ dependencies {
     })
     compile files('libs/jxl.jar')
     compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.naver.speech.clientapi:naverspeech-sdk-android:1.1.2'
-    compile 'com.android.support.constraint:constraint-layout:+'
     testCompile 'junit:junit:4.12'
+    compile 'com.naver.speech.clientapi:naverspeech-sdk-android:1.1.2'
 }
