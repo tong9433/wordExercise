@@ -2,9 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ryu.wordexercise">
     <uses-permission android:name="android.permission.INTERNET" />
+<<<<<<< HEAD
+=======
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+>>>>>>> 19bfefb589302a06cf0f55c7061b40b19b0d7559
 
     <application
         android:name=".DB.MyApplication"
@@ -20,8 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.TranslateActivity"></activity>
         <activity android:name=".Activity.RunningGameActivity" />
         <activity android:name=".Activity.QuizGameActivity" />
+
     </application>
 
 </manifest>
