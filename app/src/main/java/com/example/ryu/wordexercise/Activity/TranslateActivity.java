@@ -1,10 +1,13 @@
-package com.example.ryu.wordexercise;
+package com.example.ryu.wordexercise.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.ryu.wordexercise.R;
+import com.example.ryu.wordexercise.Translator;
 
 public class TranslateActivity extends AppCompatActivity {
     Button bt_translate;

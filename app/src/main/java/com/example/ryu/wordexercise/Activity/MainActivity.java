@@ -1,4 +1,4 @@
-package com.example.ryu.wordexercise;
+package com.example.ryu.wordexercise.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
+import com.example.ryu.wordexercise.DB.Word;
+import com.example.ryu.wordexercise.R;
 import java.io.InputStream;
 
 import io.realm.Realm;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Realm realm;
     Word word;
     Context mContext = this;
+
 
     Button bt_recognize;
     Button bt_translate;
@@ -55,7 +57,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        bt_recognize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(getApplicationContext(),RunningGameActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        bt_textToSpeech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(getApplicationContext(),QuizGameActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
+
+
 
 
     protected void copyExcelToDatabase() {

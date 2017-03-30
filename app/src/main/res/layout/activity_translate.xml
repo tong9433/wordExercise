@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ryu.wordexercise.TranslateActivity">
+    tools:context="com.example.ryu.wordexercise.Activity.TranslateActivity">
 
     <Button
         android:id="@+id/TransButton"
