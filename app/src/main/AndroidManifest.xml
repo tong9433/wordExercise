@@ -24,6 +24,7 @@
         <activity android:name=".Activity.TranslateActivity"></activity>
         <activity android:name=".Activity.RunningGameActivity" />
         <activity android:name=".Activity.QuizGameActivity" />
+        <activity android:name=".Activity.Dictionary2Activity"/>
 
     </application>
 

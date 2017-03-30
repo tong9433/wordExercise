@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     Button bt_recognize;
     Button bt_translate;
     Button bt_textToSpeech;
+    Button bt_dictionary2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         bt_recognize = (Button) findViewById(R.id.bt_recognize);
         bt_translate = (Button) findViewById(R.id.bt_translate);
         bt_textToSpeech = (Button) findViewById(R.id.bt_textToSpeech);
-
+        bt_dictionary2 = (Button)findViewById(R.id.bt_dictionary2);
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         listView.setAdapter(arrayAdapter);
         copyExcelToDatabase();
@@ -82,7 +83,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        bt_dictionary2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),Dictionary2Activity.class);
+                startActivity(intent);
+            }
+        });
         requestPermission();
     }
 
