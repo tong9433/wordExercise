@@ -30,7 +30,7 @@ public class TranslateActivity extends AppCompatActivity {
                 Translator tr = Translator.getInstance();
 
                 testText = "감사합니다";
-                translatedText = tr.translate(testText);
+                translatedText = tr.translate(testText,Translator.ENG,Translator.KOR);
                 txt_translated.setText(translatedText);
             }
         });
