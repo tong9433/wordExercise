@@ -1,8 +1,13 @@
 package com.example.ryu.wordexercise.Activity;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -30,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     Realm realm;
     Word word;
+    Context mContext = this;
 
 
     Button bt_recognize;
@@ -45,9 +51,17 @@ public class MainActivity extends AppCompatActivity {
         bt_translate = (Button) findViewById(R.id.bt_translate);
         bt_textToSpeech = (Button) findViewById(R.id.bt_textToSpeech);
 
-        arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         listView.setAdapter(arrayAdapter);
         copyExcelToDatabase();
+
+        bt_translate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, TranslateActivity.class);
+                startActivity(intent);
+            }
+        });
 
         bt_recognize.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,9 +82,28 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        requestPermission();
     }
 
+    private void requestPermission(){
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this, new String[]{
+                        Manifest.permission.RECORD_AUDIO,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE},0);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+        }
+    }
 
 
     protected void copyExcelToDatabase() {
@@ -80,30 +113,28 @@ public class MainActivity extends AppCompatActivity {
             workbookSettings.setEncoding("euc-kr");
             workbook = Workbook.getWorkbook(inputStream, workbookSettings);
 
-            if( workbook != null) {
+            if (workbook != null) {
                 Log.d("check1", "workbook is not null");
                 sheet = workbook.getSheet(0);
-                if( sheet != null) {
+                if (sheet != null) {
                     Log.d("check1", "sheet is not null");
                     realm = Realm.getDefaultInstance();
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            for(int i=0; i<800; i++) {
+                            for (int i = 0; i < 800; i++) {
                                 word = realm.createObject(Word.class);
                                 word.setWord(sheet.getCell(0, i).getContents().toString());
-                                Log.d("Word UTF checking", ""+word.getWord());
-                                word.setMean(sheet.getCell(1,i).getContents().toString());
-                                Log.d("Mean UTF checking", ""+word.getMean());
+                                Log.d("Word UTF checking", "" + word.getWord());
+                                word.setMean(sheet.getCell(1, i).getContents().toString());
+                                Log.d("Mean UTF checking", "" + word.getMean());
                             }
                         }
                     });
-                }
-                else {
+                } else {
                     Log.d("check1", "sheet is null");
                 }
-            }
-            else {
+            } else {
                 Log.d("check", "workbook is null");
             }
         } catch (Exception e) {
@@ -111,11 +142,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         final RealmResults<Word> results = realm.where(Word.class).findAll();
-        Log.d("result size : ", ""+results.size());
+        Log.d("result size : ", "" + results.size());
         for (int i = 0; i < results.size(); i++) {
             String word = results.get(i).getWord().toString();
             String mean = results.get(i).getMean().toString();
-            String result = word +" : "+mean;
+            String result = word + " : " + mean;
             arrayAdapter.add(result);
         }
     }
