@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         bt_dictionary2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Dictionary2Activity.class);
+                Intent intent = new Intent(getApplicationContext(),DictionaryActivity.class);
                 startActivity(intent);
             }
         });
