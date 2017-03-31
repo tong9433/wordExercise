@@ -19,6 +19,7 @@ public class Translator {
     public static final String KOR = "ko";
 
     private static Translator translator = new Translator();
+    private static String returnLangType;
 
     private static final String clientId = "HJwABjKOdTik1lfe7o_E";
     private static final String clientSecret = "R__r9XpvZu";
@@ -65,7 +66,7 @@ public class Translator {
             con.setRequestProperty("X-Naver-Client-Id", clientId);
             con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
             // post request
-            String postParams = "source=ko&target=en&text=" + text;
+            String postParams = "source="+source+"&target="+target+"&text=" + text;
             con.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             wr.writeBytes(postParams);

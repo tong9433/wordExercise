@@ -16,6 +16,8 @@ import com.example.ryu.wordexercise.AudioWriterPCM;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import com.naver.speech.clientapi.SpeechConfig;
 import com.naver.speech.clientapi.SpeechRecognitionResult;
 
 /**
@@ -115,7 +117,7 @@ public class RunningGameActivity extends Activity {
                     mResult = "";
                     txtResult.setText("Connecting...");
                     btnStart.setText("Stop");
-                    naverRecognizer.recognize();
+                    naverRecognizer.recognize(SpeechConfig.LanguageType.ENGLISH);
                 } else {
                     Log.d(TAG, "stop and wait Final Result");
                     btnStart.setEnabled(false);
