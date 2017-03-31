@@ -36,6 +36,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="음성합성" />
+
+        <Button
+            android:id="@+id/bt_dictionary2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="한영사전" />
+
     </LinearLayout>
 
 </LinearLayout>

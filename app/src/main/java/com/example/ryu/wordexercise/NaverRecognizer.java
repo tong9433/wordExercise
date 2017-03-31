@@ -20,7 +20,7 @@ public class NaverRecognizer implements SpeechRecognitionListener {
 
 	private Handler mHandler;
 	private SpeechRecognizer mRecognizer;
-
+	private static LanguageType langType;
 	public NaverRecognizer(Context context, Handler handler, String clientId) {
 		this.mHandler = handler;
 
@@ -41,14 +41,23 @@ public class NaverRecognizer implements SpeechRecognitionListener {
 		mRecognizer.setSpeechRecognitionListener(this);
 	}
 
+	public static LanguageType getLangType() {
+		return langType;
+	}
+
+	public static void setLangType(LanguageType langType) {
+		NaverRecognizer.langType = langType;
+	}
+
 	public SpeechRecognizer getSpeechRecognizer() {
 		return mRecognizer;
 	}
 
-	public void recognize() {
+	public void recognize(LanguageType languageType) {
 		try {
+			setLangType(languageType);
 			mRecognizer.recognize(new SpeechConfig(
-									LanguageType.ENGLISH,
+									languageType,
 									EndPointDetectType.AUTO));
 		} catch (SpeechRecognitionException e) {
 			e.printStackTrace();
