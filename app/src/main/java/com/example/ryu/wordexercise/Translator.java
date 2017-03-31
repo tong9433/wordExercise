@@ -14,6 +14,10 @@ import java.net.URLEncoder;
  */
 
 public class Translator {
+    //언어 설정은 클래스안의 ENG, KOR 상수를 이용하면 됨
+    public static final String ENG = "en";
+    public static final String KOR = "ko";
+
     private static Translator translator = new Translator();
 
     private static final String clientId = "HJwABjKOdTik1lfe7o_E";
@@ -25,12 +29,13 @@ public class Translator {
         return translator;
     }
 
-    public String translate(final String str){
+    // #parameter str : 번역할 말, source : 번역할 언어, target : 번역 결과 언어
+    public String translate(final String str, final String source, final String target){
 
         Thread workingThread = new Thread() {
             public void run() {
                 try {
-                    translatedStr = getTranslatedText(str);
+                    translatedStr = getTranslatedText(str,source,target);
                 }catch(Exception e) {
                     e.printStackTrace();
                 }
@@ -47,7 +52,7 @@ public class Translator {
         return translatedStr;
     }
 
-    private String getTranslatedText(String str){
+    private String getTranslatedText(String str,String source, String target){
         StringBuffer response = new StringBuffer();
         String result="";
 
